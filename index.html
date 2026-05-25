@@ -401,18 +401,20 @@ DAFTAR SEKARANG
 <script>
 
 // ======================================
-// URL WEB APP
+// WEB APP URL
 // ======================================
 
 const WEBAPP_URL =
-"https://script.google.com/macros/s/AKfycbwr5NReGwYtYWt7hvx4Kw_LwAEZ2d0hVj3WGUPxfYzDXfFO8tno8w-PBO026at7ZNAcaw/exec";
+"https://script.google.com/macros/s/AKfycbzOHIHdm8Ot3K_ZWxU82Wt0oz5sdr4WtR2dgEsDJG36ladh_kWuvBssTCVNlvkWV9q9/exec";
 
 // ======================================
 // URL PARAM
 // ======================================
 
 const params =
-new URLSearchParams(window.location.search);
+new URLSearchParams(
+window.location.search
+);
 
 const kodeKomunitas =
 params.get("kode");
@@ -433,8 +435,20 @@ document.getElementById("nik");
 const tanggalLahirInput =
 document.getElementById("tanggalLahir");
 
+const loading =
+document.getElementById("loading");
+
+const successBox =
+document.getElementById("successBox");
+
+const successText =
+document.getElementById("successText");
+
+const form =
+document.getElementById("registerForm");
+
 // ======================================
-// DATA COMMUNITY
+// DATA KOMUNITAS
 // ======================================
 
 let komunitasData = null;
@@ -447,34 +461,73 @@ async function loadKomunitas(){
 
 try{
 
+if(!kodeKomunitas){
+
+communityInfo.innerHTML =
+"❌ Kode komunitas tidak ditemukan";
+
+submitBtn.disabled = true;
+
+return;
+
+}
+
 const response =
 await fetch(
-`${WEBAPP_URL}?action=getKomunitas&kode=${kodeKomunitas}`
+`${WEBAPP_URL}?kode=${kodeKomunitas}`
 );
 
 const res =
 await response.json();
 
-if(res.status === "success"){
+console.log(res);
 
-komunitasData = res.data;
+// ======================================
+// SUCCESS
+// ======================================
+
+if(
+res.status === "success"
+){
+
+komunitasData = {
+
+kodeKomunitas :
+res.kodeKomunitas,
+
+namaKomunitas :
+res.namaKomunitas,
+
+kategori :
+res.kategori,
+
+jumlahPeserta :
+res.totalSlot,
+
+jumlahTerdaftar :
+res.totalTerdaftar
+
+};
 
 // ======================================
 // SLOT
 // ======================================
 
 const sisa =
-res.data.jumlahPeserta -
-res.data.jumlahTerdaftar;
+
+res.totalSlot -
+res.totalTerdaftar;
 
 // ======================================
-// FULL
+// SLOT HABIS
 // ======================================
 
 if(sisa <= 0){
 
 communityInfo.innerHTML = `
+
 🚫 KUOTA KOMUNITAS SUDAH PENUH
+
 `;
 
 submitBtn.disabled = true;
@@ -487,22 +540,22 @@ return;
 }
 
 // ======================================
-// SHOW
+// SHOW INFO
 // ======================================
 
 communityInfo.innerHTML = `
 
 🏃 <b>Komunitas :</b>
-${res.data.namaKomunitas}<br>
+${res.namaKomunitas}<br><br>
 
 🎟 <b>Kategori :</b>
-${res.data.kategori}<br>
+${res.kategori}<br><br>
 
-👥 <b>Jumlah Slot :</b>
-${res.data.jumlahPeserta}<br>
+👥 <b>Total Slot :</b>
+${res.totalSlot}<br><br>
 
 ✅ <b>Sudah Terdaftar :</b>
-${res.data.jumlahTerdaftar}<br>
+${res.totalTerdaftar}<br><br>
 
 🔥 <span class="slot">
 Sisa Slot :
@@ -514,7 +567,7 @@ ${sisa}
 }else{
 
 communityInfo.innerHTML =
-"❌ Kode komunitas tidak ditemukan";
+"❌ Kode komunitas tidak valid";
 
 submitBtn.disabled = true;
 
@@ -525,7 +578,9 @@ submitBtn.disabled = true;
 console.log(err);
 
 communityInfo.innerHTML =
-"❌ Gagal memuat data komunitas";
+"❌ Gagal memuat komunitas";
+
+submitBtn.disabled = true;
 
 }
 
@@ -534,141 +589,204 @@ communityInfo.innerHTML =
 loadKomunitas();
 
 // ======================================
-// AUTO TANGGAL LAHIR
+// AUTO TANGGAL DARI NIK
 // ======================================
 
-nikInput.addEventListener("input", function(){
+nikInput.addEventListener(
+"input",
+function(){
 
-const nik = this.value;
+const nik =
+this.value;
 
 if(nik.length === 16){
 
 let tanggal =
-parseInt(nik.substring(6,8));
+parseInt(
+nik.substring(6,8)
+);
 
 let bulan =
-parseInt(nik.substring(8,10));
+parseInt(
+nik.substring(8,10)
+);
 
 let tahun =
-parseInt(nik.substring(10,12));
+parseInt(
+nik.substring(10,12)
+);
 
 if(tanggal > 40){
+
 tanggal -= 40;
+
 }
 
-const tahunSekarang =
-new Date().getFullYear() % 100;
+const tahunNow =
+new Date()
+.getFullYear() % 100;
 
-if(tahun <= tahunSekarang){
-tahun = 2000 + tahun;
+if(tahun <= tahunNow){
+
+tahun =
+2000 + tahun;
+
 }else{
-tahun = 1900 + tahun;
+
+tahun =
+1900 + tahun;
+
 }
 
-const formatTanggal =
+const hasil =
+
 `${tahun}-${String(bulan).padStart(2,"0")}-${String(tanggal).padStart(2,"0")}`;
 
 tanggalLahirInput.value =
-formatTanggal;
+hasil;
 
 }
 
-});
+}
+);
 
 // ======================================
 // SUBMIT
 // ======================================
 
-document
-.getElementById("registerForm")
-.addEventListener("submit", async function(e){
+form.addEventListener(
+"submit",
+async function(e){
 
 e.preventDefault();
 
-document.getElementById("loading")
-.style.display = "block";
+// ======================================
+// LOADING
+// ======================================
+
+loading.style.display =
+"block";
 
 submitBtn.disabled = true;
 
-const form = e.target;
+submitBtn.innerText =
+"SEDANG MENGIRIM...";
+
+// ======================================
+// DATA
+// ======================================
 
 const data = {
 
-kodeKomunitas : kodeKomunitas,
-namaKomunitas : komunitasData.namaKomunitas,
-kategori : komunitasData.kategori,
+type : "anggota",
 
-namaLengkap : form.namaLengkap.value,
-nik : form.nik.value,
-namaBib : form.namaBib.value,
-tanggalLahir : form.tanggalLahir.value,
-jenisKelamin : form.jenisKelamin.value,
-wa : form.wa.value,
-email : form.email.value,
-kota : form.kota.value,
-jersey : form.jersey.value,
-goldar : form.goldar.value,
-riwayat : form.riwayat.value,
-kontakDarurat : form.kontakDarurat.value
+kodeKomunitas :
+kodeKomunitas,
+
+namaPeserta :
+form.namaLengkap.value,
+
+gender :
+form.jenisKelamin.value,
+
+tanggalLahir :
+form.tanggalLahir.value,
+
+noWhatsapp :
+form.wa.value,
+
+email :
+form.email.value,
+
+kota :
+form.kota.value,
+
+ukuranJersey :
+form.jersey.value,
+
+emergencyName :
+"Kontak Darurat",
+
+emergencyPhone :
+form.kontakDarurat.value
 
 };
+
+// ======================================
+// FETCH
+// ======================================
 
 try{
 
 const response =
-await fetch(WEBAPP_URL,{
+await fetch(
+WEBAPP_URL,
+{
 
 method : "POST",
 
 headers : {
-"Content-Type" : "text/plain;charset=utf-8"
+
+"Content-Type" :
+"text/plain;charset=utf-8"
+
 },
 
-body : JSON.stringify({
-action : "registerAnggotaKomunitas",
-...data
-})
+body :
+JSON.stringify(data)
 
-});
+}
+);
 
 const res =
 await response.json();
 
-document.getElementById("loading")
-.style.display = "none";
+console.log(res);
 
-submitBtn.disabled = false;
+// ======================================
+// HIDE LOADING
+// ======================================
+
+loading.style.display =
+"none";
+
+submitBtn.disabled =
+false;
+
+submitBtn.innerText =
+"DAFTAR SEKARANG";
+
+// ======================================
+// SUCCESS
+// ======================================
 
 if(res.status === "success"){
 
-document.getElementById("successBox")
-.style.display = "block";
+successBox.style.display =
+"block";
 
-document.getElementById("successText")
-.innerHTML = `
+successText.innerHTML = `
 
 <div style="
 background:#0b1f3d;
 padding:22px;
 border-radius:18px;
+line-height:1.9;
 ">
 
-🏃 REGISTRASI PESERTA DARI KOMUNITAS<br>
-<b>${komunitasData.namaKomunitas}</b><br><br>
+🏃 REGISTRASI BERHASIL<br><br>
 
-TELAH BERHASIL ✅<br><br>
+👥 <b>Komunitas :</b><br>
+${komunitasData.namaKomunitas}<br><br>
 
-🆔 Register ID :
-<b>${res.registerId}</b><br><br>
+🎟 <b>Kategori :</b><br>
+${komunitasData.kategori}<br><br>
 
-Terimakasih sudah ikut meramaikan
-<b>RUN FOR YOUR LIFE 2026</b>.<br><br>
+🆔 <b>BIB :</b><br>
+${res.bib}<br><br>
 
-Tunggu admin mengirimkan pesan
-WhatsApp untuk validasi data peserta.<br><br>
-
-🔥 Semangat dan tularkan semangat larimu
-ke peserta non komunitas.
+🔥 Sampai jumpa di
+<b>RUN FOR YOUR LIFE 2026</b>
 
 </div>
 
@@ -678,8 +796,11 @@ form.reset();
 
 window.scrollTo({
 
-top : document.body.scrollHeight,
-behavior : "smooth"
+top :
+document.body.scrollHeight,
+
+behavior :
+"smooth"
 
 });
 
@@ -687,24 +808,34 @@ loadKomunitas();
 
 }else{
 
-alert(res.message);
+alert(
+res.message ||
+"Register gagal"
+);
 
 }
 
 }catch(err){
 
-document.getElementById("loading")
-.style.display = "none";
+loading.style.display =
+"none";
 
-submitBtn.disabled = false;
+submitBtn.disabled =
+false;
 
-alert(err.message);
+submitBtn.innerText =
+"DAFTAR SEKARANG";
+
+alert(
+err.message
+);
 
 console.log(err);
 
 }
 
-});
+}
+);
 
 </script>
 

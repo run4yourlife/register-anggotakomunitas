@@ -786,10 +786,21 @@ successBox.style.display =
 
 
 // ======================================
-// PESAN WHATSAPP PESERTA
+// FORMAT NOMOR WA
 // ======================================
 
-const pesertaMessage = encodeURIComponent(
+const nomorPeserta =
+form.wa.value
+.replace(/\D/g,"")
+.replace(/^0/,"62");
+
+
+// ======================================
+// PESAN WA PESERTA
+// ======================================
+
+const pesertaMessage =
+encodeURIComponent(
 
 `🏃 RUN FOR YOUR LIFE 2026
 
@@ -836,26 +847,16 @@ Terimakasih.`
 
 
 // ======================================
-// FORMAT NOMOR WA
-// ======================================
-
-const nomorPeserta =
-form.whatsapp.value
-.replace(/\D/g,"")
-.replace(/^0/,"62");
-
-
-// ======================================
-// LINK WA PESERTA
+// LINK WA
 // ======================================
 
 const pesertaWaLink =
 `https://wa.me/${nomorPeserta}?text=${pesertaMessage}`;
 
 
-//
-// TAMPILKAN SUCCESS
-//
+// ======================================
+// TAMPILKAN SUCCESS HTML
+// ======================================
 
 successText.innerHTML = `
 
@@ -864,31 +865,47 @@ background:#0b1f3d;
 padding:22px;
 border-radius:18px;
 line-height:1.9;
+border:1px solid rgba(255,255,255,0.08);
 ">
 
 🏃 HALLO, SELAMAT<br>
-<b>${form.namaLengkap.value}</b><br>
+
+<b style="
+font-size:20px;
+color:#f6c453;
+">
+${form.namaLengkap.value}
+</b>
+
+<br><br>
+
 REGISTRASI ANDA BERHASIL ✅
+
 <br><br>
 
 👥 <b>Komunitas :</b><br>
 ${komunitasData.namaKomunitas}
+
 <br><br>
 
 🎟 <b>Kategori :</b><br>
 ${komunitasData.kategori}
+
 <br><br>
 
 🆔 <b>Register ID :</b><br>
 ${res.registerId}
+
 <br><br>
 
 🏷 <b>No BIB :</b><br>
 ${res.bib}
+
 <br><br>
 
 🎽 <b>Nama BIB :</b><br>
 ${form.namaBib.value}
+
 <br><br>
 
 🔥 Sampai jumpa di
@@ -921,7 +938,17 @@ box-shadow:0 8px 20px rgba(0,200,83,.35);
 
 `;
 
+
+// ======================================
+// RESET FORM
+// ======================================
+
 form.reset();
+
+
+// ======================================
+// SCROLL
+// ======================================
 
 window.scrollTo({
 
@@ -933,6 +960,11 @@ behavior :
 
 });
 
+
+// ======================================
+// RELOAD SLOT
+// ======================================
+
 loadKomunitas();
 
 }else{
@@ -943,7 +975,6 @@ res.message ||
 );
 
 }
-
 }catch(err){
 
 loading.style.display =

@@ -7,7 +7,9 @@
 
 <title>REGISTRASI ANGGOTA KOMUNITAS</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
 
 <style>
 
@@ -30,14 +32,14 @@ margin:auto;
 background:#0d2347;
 border-radius:24px;
 overflow:hidden;
-box-shadow:0 0 40px rgba(0,0,0,0.5);
+box-shadow:0 0 40px rgba(0,0,0,.45);
 }
 
 .banner{
 width:100%;
-height:320px;
+height:300px;
 background:
-linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
+linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
 url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1600');
 background-size:cover;
 background-position:center;
@@ -46,15 +48,15 @@ position:relative;
 
 .banner-content{
 position:absolute;
-bottom:30px;
 left:30px;
+bottom:30px;
 }
 
 .banner-content h1{
-font-size:52px;
-color:#f6c453;
+font-size:50px;
+font-weight:800;
 line-height:1;
-font-weight:700;
+color:#f6c453;
 }
 
 .banner-content p{
@@ -66,18 +68,23 @@ font-size:18px;
 padding:30px;
 }
 
-.info-box{
+.community-box{
 background:#132f5e;
 padding:22px;
 border-radius:18px;
-margin-bottom:30px;
+margin-bottom:25px;
 line-height:1.9;
+}
+
+.slot{
+color:#f6c453;
+font-weight:700;
 }
 
 .section-title{
 color:#f6c453;
-margin-bottom:25px;
 font-size:25px;
+margin-bottom:25px;
 border-left:5px solid #f6c453;
 padding-left:12px;
 }
@@ -95,7 +102,7 @@ flex-direction:column;
 
 .input-group label{
 margin-bottom:8px;
-font-weight:500;
+font-weight:600;
 }
 
 .input-group input,
@@ -107,6 +114,7 @@ border-radius:14px;
 background:#132f5e;
 color:white;
 font-size:15px;
+outline:none;
 }
 
 .input-group textarea{
@@ -130,22 +138,13 @@ border-radius:14px;
 background:#f6c453;
 color:#06152d;
 font-size:18px;
-font-weight:700;
+font-weight:800;
 cursor:pointer;
-transition:0.3s;
+transition:.25s;
 }
 
 button:hover{
-transform:scale(1.02);
-}
-
-.success{
-display:none;
-margin-top:30px;
-background:#10391e;
-padding:25px;
-border-radius:16px;
-line-height:1.8;
+transform:translateY(-2px);
 }
 
 .loading{
@@ -153,27 +152,48 @@ display:none;
 margin-top:20px;
 text-align:center;
 color:#f6c453;
-font-size:16px;
+font-weight:600;
 }
 
-.hidden{
-display:none !important;
-}
-
-.community-box{
-background:#132f5e;
-padding:22px;
+.success{
+display:none;
+margin-top:30px;
+background:#10391e;
+padding:25px;
 border-radius:18px;
-margin-bottom:25px;
-line-height:1.9;
 }
 
-.slot{
-color:#f6c453;
-font-weight:700;
+.success h2{
+font-size:34px;
+margin-bottom:20px;
 }
 
 @media(max-width:768px){
+
+body{
+padding:14px;
+}
+
+.banner{
+height:230px;
+}
+
+.banner-content{
+left:20px;
+bottom:20px;
+}
+
+.banner-content h1{
+font-size:34px;
+}
+
+.banner-content p{
+font-size:15px;
+}
+
+.form-section{
+padding:20px;
+}
 
 .grid{
 grid-template-columns:1fr;
@@ -181,14 +201,6 @@ grid-template-columns:1fr;
 
 .full{
 grid-column:auto;
-}
-
-.banner{
-height:240px;
-}
-
-.banner-content h1{
-font-size:34px;
 }
 
 }
@@ -204,8 +216,13 @@ font-size:34px;
 <div class="banner">
 
 <div class="banner-content">
+
 <h1>RUN FOR YOUR LIFE 2026</h1>
-<p>REGISTRASI ANGGOTA KOMUNITAS</p>
+
+<p>
+REGISTRASI ANGGOTA KOMUNITAS
+</p>
+
 </div>
 
 </div>
@@ -229,14 +246,15 @@ FORM PESERTA KOMUNITAS
 <!-- NAMA -->
 <div class="input-group">
 <label>Nama Lengkap</label>
-<input type="text" name="namaLengkap" required>
+<input
+type="text"
+name="namaLengkap"
+required>
 </div>
 
 <!-- NIK -->
 <div class="input-group">
-
 <label>NIK</label>
-
 <input
 type="text"
 name="nik"
@@ -245,34 +263,34 @@ maxlength="16"
 pattern="[0-9]{16}"
 placeholder="16 digit NIK"
 required>
-
 </div>
 
 <!-- NAMA BIB -->
 <div class="input-group">
 <label>Nama BIB</label>
-<input type="text" name="namaBib" required>
+<input
+type="text"
+name="namaBib"
+required>
 </div>
 
 <!-- TGL -->
 <div class="input-group">
-
 <label>Tanggal Lahir</label>
-
 <input
 type="date"
 name="tanggalLahir"
 id="tanggalLahir"
 required>
-
 </div>
 
 <!-- JK -->
 <div class="input-group">
-
 <label>Jenis Kelamin</label>
 
-<select name="jenisKelamin" required>
+<select
+name="jenisKelamin"
+required>
 
 <option value="">Pilih</option>
 <option value="Laki-laki">Laki-laki</option>
@@ -284,7 +302,6 @@ required>
 
 <!-- WA -->
 <div class="input-group">
-
 <label>Nomor WhatsApp</label>
 
 <input
@@ -298,29 +315,40 @@ required>
 <!-- EMAIL -->
 <div class="input-group">
 <label>Email</label>
-<input type="email" name="email" required>
+
+<input
+type="email"
+name="email"
+required>
+
 </div>
 
 <!-- KOTA -->
 <div class="input-group">
 <label>Kota Asal</label>
-<input type="text" name="kota" required>
+
+<input
+type="text"
+name="kota"
+required>
+
 </div>
 
 <!-- JERSEY -->
 <div class="input-group">
-
 <label>Ukuran Jersey</label>
 
-<select name="jersey" required>
+<select
+name="jersey"
+required>
 
 <option value="">Pilih</option>
-<option value="XS">XS</option>
-<option value="S">S</option>
-<option value="M">M</option>
-<option value="L">L</option>
-<option value="XL">XL</option>
-<option value="XXL">XXL</option>
+<option>XS</option>
+<option>S</option>
+<option>M</option>
+<option>L</option>
+<option>XL</option>
+<option>XXL</option>
 
 </select>
 
@@ -328,7 +356,6 @@ required>
 
 <!-- GOLDAR -->
 <div class="input-group">
-
 <label>Golongan Darah</label>
 
 <select name="goldar">
@@ -345,7 +372,6 @@ required>
 
 <!-- KONTAK -->
 <div class="input-group">
-
 <label>Kontak Darurat</label>
 
 <input
@@ -358,7 +384,6 @@ required>
 
 <!-- RIWAYAT -->
 <div class="input-group full">
-
 <label>Riwayat Penyakit</label>
 
 <textarea
@@ -370,8 +395,12 @@ name="riwayat"></textarea>
 <!-- BUTTON -->
 <div class="full">
 
-<button type="submit" id="submitBtn">
+<button
+type="submit"
+id="submitBtn">
+
 DAFTAR SEKARANG
+
 </button>
 
 </div>
@@ -380,17 +409,23 @@ DAFTAR SEKARANG
 
 </form>
 
-<div class="loading" id="loading">
+<div
+class="loading"
+id="loading">
+
 ⏳ Sedang mengirim data...
+
 </div>
 
-<div class="success" id="successBox">
+<div
+class="success"
+id="successBox">
 
 <h2>
 ✅ REGISTRASI BERHASIL
 </h2>
 
-<p id="successText"></p>
+<div id="successText"></div>
 
 </div>
 
@@ -429,12 +464,6 @@ document.getElementById("communityInfo");
 const submitBtn =
 document.getElementById("submitBtn");
 
-const nikInput =
-document.getElementById("nik");
-
-const tanggalLahirInput =
-document.getElementById("tanggalLahir");
-
 const loading =
 document.getElementById("loading");
 
@@ -447,6 +476,12 @@ document.getElementById("successText");
 const form =
 document.getElementById("registerForm");
 
+const nikInput =
+document.getElementById("nik");
+
+const tanggalLahirInput =
+document.getElementById("tanggalLahir");
+
 // ======================================
 // DATA KOMUNITAS
 // ======================================
@@ -454,7 +489,7 @@ document.getElementById("registerForm");
 let komunitasData = null;
 
 // ======================================
-// LOAD DATA KOMUNITAS
+// LOAD KOMUNITAS
 // ======================================
 
 async function loadKomunitas(){
@@ -480,81 +515,36 @@ await fetch(
 const res =
 await response.json();
 
-console.log(res);
+if(res.status === "success"){
 
-// ======================================
-// SUCCESS
-// ======================================
-
-if(
-res.status === "success"
-){
-
-komunitasData = {
-
-kodeKomunitas :
-res.kodeKomunitas,
-
-namaKomunitas :
-res.namaKomunitas,
-
-kategori :
-res.kategori,
-
-jumlahPeserta :
-res.totalSlot,
-
-jumlahTerdaftar :
-res.totalTerdaftar
-
-};
-
-// ======================================
-// SLOT
-// ======================================
+komunitasData = res;
 
 const sisa =
-
-res.totalSlot -
-res.totalTerdaftar;
-
-// ======================================
-// SLOT HABIS
-// ======================================
+res.totalSlot - res.totalTerdaftar;
 
 if(sisa <= 0){
 
-communityInfo.innerHTML = `
-
-🚫 KUOTA KOMUNITAS SUDAH PENUH
-
-`;
+communityInfo.innerHTML =
+"🚫 Kuota komunitas sudah penuh";
 
 submitBtn.disabled = true;
-
-submitBtn.innerText =
-"KUOTA PENUH";
 
 return;
 
 }
 
-// ======================================
-// SHOW INFO
-// ======================================
-
 communityInfo.innerHTML = `
 
-🏃 <b>Komunitas :</b>
+🏃 <b>Komunitas :</b><br>
 ${res.namaKomunitas}<br><br>
 
-🎟 <b>Kategori :</b>
+🎟 <b>Kategori :</b><br>
 ${res.kategori}<br><br>
 
-👥 <b>Total Slot :</b>
+👥 <b>Total Slot :</b><br>
 ${res.totalSlot}<br><br>
 
-✅ <b>Sudah Terdaftar :</b>
+✅ <b>Sudah Terdaftar :</b><br>
 ${res.totalTerdaftar}<br><br>
 
 🔥 <span class="slot">
@@ -578,7 +568,7 @@ submitBtn.disabled = true;
 console.log(err);
 
 communityInfo.innerHTML =
-"❌ Gagal memuat komunitas";
+"❌ Gagal memuat data komunitas";
 
 submitBtn.disabled = true;
 
@@ -589,7 +579,7 @@ submitBtn.disabled = true;
 loadKomunitas();
 
 // ======================================
-// AUTO TANGGAL DARI NIK
+// AUTO TANGGAL LAHIR DARI NIK
 // ======================================
 
 nikInput.addEventListener(
@@ -602,48 +592,33 @@ this.value;
 if(nik.length === 16){
 
 let tanggal =
-parseInt(
-nik.substring(6,8)
-);
+parseInt(nik.substring(6,8));
 
 let bulan =
-parseInt(
-nik.substring(8,10)
-);
+parseInt(nik.substring(8,10));
 
 let tahun =
-parseInt(
-nik.substring(10,12)
-);
+parseInt(nik.substring(10,12));
 
 if(tanggal > 40){
-
 tanggal -= 40;
-
 }
 
 const tahunNow =
-new Date()
-.getFullYear() % 100;
+new Date().getFullYear() % 100;
 
 if(tahun <= tahunNow){
 
-tahun =
-2000 + tahun;
+tahun = 2000 + tahun;
 
 }else{
 
-tahun =
-1900 + tahun;
+tahun = 1900 + tahun;
 
 }
 
-const hasil =
-
-`${tahun}-${String(bulan).padStart(2,"0")}-${String(tanggal).padStart(2,"0")}`;
-
 tanggalLahirInput.value =
-hasil;
+`${tahun}-${String(bulan).padStart(2,"0")}-${String(tanggal).padStart(2,"0")}`;
 
 }
 
@@ -651,7 +626,7 @@ hasil;
 );
 
 // ======================================
-// SUBMIT
+// SUBMIT FORM
 // ======================================
 
 form.addEventListener(
@@ -659,10 +634,6 @@ form.addEventListener(
 async function(e){
 
 e.preventDefault();
-
-// ======================================
-// LOADING
-// ======================================
 
 loading.style.display =
 "block";
@@ -672,20 +643,12 @@ submitBtn.disabled = true;
 submitBtn.innerText =
 "SEDANG MENGIRIM...";
 
-// ======================================
-// DATA
-// ======================================
-
 const data = {
 
 type : "anggota",
 
 kodeKomunitas :
 kodeKomunitas,
-
-// ======================================
-// DATA PESERTA
-// ======================================
 
 namaPeserta :
 form.namaLengkap.value,
@@ -720,10 +683,6 @@ form.goldar.value,
 riwayat :
 form.riwayat.value,
 
-// ======================================
-// KONTAK DARURAT
-// ======================================
-
 emergencyName :
 "Kontak Darurat",
 
@@ -731,9 +690,6 @@ emergencyPhone :
 form.kontakDarurat.value
 
 };
-// ======================================
-// FETCH
-// ======================================
 
 try{
 
@@ -741,49 +697,29 @@ const response =
 await fetch(
 WEBAPP_URL,
 {
-
-method : "POST",
-
-headers : {
-
-"Content-Type" :
-"text/plain;charset=utf-8"
-
+method:"POST",
+headers:{
+"Content-Type":"text/plain;charset=utf-8"
 },
-
-body :
-JSON.stringify(data)
-
+body:JSON.stringify(data)
 }
 );
 
 const res =
 await response.json();
 
-console.log(res);
-
-// ======================================
-// HIDE LOADING
-// ======================================
-
 loading.style.display =
 "none";
 
-submitBtn.disabled =
-false;
+submitBtn.disabled = false;
 
 submitBtn.innerText =
 "DAFTAR SEKARANG";
-
-// ======================================
-// SUCCESS
-// ======================================
 
 if(res.status === "success"){
 
 successBox.style.display =
 "block";
-
 
 // ======================================
 // FORMAT NOMOR WA
@@ -794,9 +730,8 @@ form.wa.value
 .replace(/\D/g,"")
 .replace(/^0/,"62");
 
-
 // ======================================
-// PESAN WA PESERTA
+// PESAN WA
 // ======================================
 
 const pesertaMessage =
@@ -829,7 +764,6 @@ ${form.namaBib.value}
 
 📌 STATUS
 SUDAH TERDAFTAR & LUNAS
-(Pembayaran oleh PIC Komunitas)
 
 ━━━━━━━━━━━━━━━
 
@@ -845,7 +779,6 @@ Terimakasih.`
 
 );
 
-
 // ======================================
 // LINK WA
 // ======================================
@@ -853,9 +786,8 @@ Terimakasih.`
 const pesertaWaLink =
 `https://wa.me/${nomorPeserta}?text=${pesertaMessage}`;
 
-
 // ======================================
-// TAMPILKAN SUCCESS HTML
+// SUCCESS HTML
 // ======================================
 
 successText.innerHTML = `
@@ -865,19 +797,11 @@ background:#0b1f3d;
 padding:22px;
 border-radius:18px;
 line-height:1.9;
-border:1px solid rgba(255,255,255,0.08);
 ">
 
 🏃 HALLO, SELAMAT<br>
 
-<b style="
-font-size:20px;
-color:#f6c453;
-">
-${form.namaLengkap.value}
-</b>
-
-<br><br>
+<b>${form.namaLengkap.value}</b><br>
 
 REGISTRASI ANDA BERHASIL ✅
 
@@ -927,7 +851,6 @@ color:white;
 font-weight:800;
 text-decoration:none;
 font-size:14px;
-box-shadow:0 8px 20px rgba(0,200,83,.35);
 ">
 
 📲 KIRIM DATA SAYA KE WHATSAPP
@@ -938,56 +861,35 @@ box-shadow:0 8px 20px rgba(0,200,83,.35);
 
 `;
 
-
-// ======================================
-// RESET FORM
-// ======================================
-
 form.reset();
 
-
-// ======================================
-// SCROLL
-// ======================================
-
 window.scrollTo({
-
-top :
-document.body.scrollHeight,
-
-behavior :
-"smooth"
-
+top:document.body.scrollHeight,
+behavior:"smooth"
 });
-
-
-// ======================================
-// RELOAD SLOT
-// ======================================
 
 loadKomunitas();
 
 }else{
 
 alert(
-res.message ||
-"Register gagal"
+res.message || "Registrasi gagal"
 );
 
 }
+
 }catch(err){
 
 loading.style.display =
 "none";
 
-submitBtn.disabled =
-false;
+submitBtn.disabled = false;
 
 submitBtn.innerText =
 "DAFTAR SEKARANG";
 
 alert(
-err.message
+"Gagal mengirim data"
 );
 
 console.log(err);

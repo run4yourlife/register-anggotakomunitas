@@ -447,9 +447,7 @@ const WEBAPP_URL =
 // ======================================
 
 const params =
-new URLSearchParams(
-window.location.search
-);
+new URLSearchParams(window.location.search);
 
 const kodeKomunitas =
 params.get("kode");
@@ -586,8 +584,7 @@ nikInput.addEventListener(
 "input",
 function(){
 
-const nik =
-this.value;
+const nik = this.value;
 
 if(nik.length === 16){
 
@@ -635,13 +632,60 @@ async function(e){
 
 e.preventDefault();
 
-loading.style.display =
-"block";
+// ======================================
+// GET VALUE
+// ======================================
+
+const namaLengkap =
+form.elements["namaLengkap"].value;
+
+const nik =
+form.elements["nik"].value;
+
+const namaBib =
+form.elements["namaBib"].value;
+
+const jenisKelamin =
+form.elements["jenisKelamin"].value;
+
+const tanggalLahir =
+form.elements["tanggalLahir"].value;
+
+const wa =
+form.elements["wa"].value;
+
+const email =
+form.elements["email"].value;
+
+const kota =
+form.elements["kota"].value;
+
+const jersey =
+form.elements["jersey"].value;
+
+const goldar =
+form.elements["goldar"].value;
+
+const riwayat =
+form.elements["riwayat"].value;
+
+const kontakDarurat =
+form.elements["kontakDarurat"].value;
+
+// ======================================
+// LOADING
+// ======================================
+
+loading.style.display = "block";
 
 submitBtn.disabled = true;
 
 submitBtn.innerText =
 "SEDANG MENGIRIM...";
+
+// ======================================
+// DATA
+// ======================================
 
 const data = {
 
@@ -651,45 +695,49 @@ kodeKomunitas :
 kodeKomunitas,
 
 namaPeserta :
-form.namaLengkap.value,
+namaLengkap,
 
 nik :
-form.nik.value,
+nik,
 
 namaBib :
-form.namaBib.value,
+namaBib,
 
 gender :
-form.jenisKelamin.value,
+jenisKelamin,
 
 tanggalLahir :
-form.tanggalLahir.value,
+tanggalLahir,
 
 noWhatsapp :
-form.wa.value,
+wa,
 
 email :
-form.email.value,
+email,
 
 kota :
-form.kota.value,
+kota,
 
 ukuranJersey :
-form.jersey.value,
+jersey,
 
 goldar :
-form.goldar.value,
+goldar,
 
 riwayat :
-form.riwayat.value,
+riwayat,
 
 emergencyName :
 "Kontak Darurat",
 
 emergencyPhone :
-form.kontakDarurat.value
+kontakDarurat
 
 };
+
+// ======================================
+// FETCH
+// ======================================
 
 try{
 
@@ -698,10 +746,13 @@ await fetch(
 WEBAPP_URL,
 {
 method:"POST",
+
 headers:{
 "Content-Type":"text/plain;charset=utf-8"
 },
+
 body:JSON.stringify(data)
+
 }
 );
 
@@ -716,17 +767,21 @@ submitBtn.disabled = false;
 submitBtn.innerText =
 "DAFTAR SEKARANG";
 
+// ======================================
+// SUCCESS
+// ======================================
+
 if(res.status === "success"){
 
 successBox.style.display =
 "block";
 
 // ======================================
-// FORMAT NOMOR WA
+// NOMOR WA
 // ======================================
 
 const nomorPeserta =
-form.wa.value
+wa
 .replace(/\D/g,"")
 .replace(/^0/,"62");
 
@@ -739,7 +794,7 @@ encodeURIComponent(
 
 `🏃 RUN FOR YOUR LIFE 2026
 
-HALLO ${form.namaLengkap.value},
+HALLO ${namaLengkap},
 
 Registrasi Anda BERHASIL ✅
 
@@ -758,7 +813,7 @@ ${res.registerId}
 ${res.bib}
 
 🎽 Nama BIB
-${form.namaBib.value}
+${namaBib}
 
 ━━━━━━━━━━━━━━━
 
@@ -799,9 +854,9 @@ border-radius:18px;
 line-height:1.9;
 ">
 
-🏃 HALLO, SELAMAT<br>
+🏃 HALLO, SELAMAT<br><br>
 
-<b>${form.namaLengkap.value}</b><br>
+<b>${namaLengkap}</b><br><br>
 
 REGISTRASI ANDA BERHASIL ✅
 
@@ -828,12 +883,7 @@ ${res.bib}
 <br><br>
 
 🎽 <b>Nama BIB :</b><br>
-${form.namaBib.value}
-
-<br><br>
-
-🔥 Sampai jumpa di
-<b>RUN FOR YOUR LIFE 2026</b>
+${namaBib}
 
 <br><br>
 
@@ -843,14 +893,13 @@ target="_blank"
 style="
 display:block;
 width:100%;
-text-align:center;
 padding:16px;
+text-align:center;
 border-radius:14px;
 background:linear-gradient(135deg,#00c853,#00e676);
 color:white;
 font-weight:800;
 text-decoration:none;
-font-size:14px;
 ">
 
 📲 KIRIM DATA SAYA KE WHATSAPP

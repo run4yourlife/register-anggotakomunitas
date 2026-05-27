@@ -784,6 +784,79 @@ if(res.status === "success"){
 successBox.style.display =
 "block";
 
+
+// ======================================
+// PESAN WHATSAPP PESERTA
+// ======================================
+
+const pesertaMessage = encodeURIComponent(
+
+`🏃 RUN FOR YOUR LIFE 2026
+
+HALLO ${form.namaLengkap.value},
+
+Registrasi Anda BERHASIL ✅
+
+━━━━━━━━━━━━━━━
+
+👥 Komunitas
+${komunitasData.namaKomunitas}
+
+🎟 Kategori
+${komunitasData.kategori}
+
+🆔 Register ID
+${res.registerId}
+
+🏷 No BIB
+${res.bib}
+
+🎽 Nama BIB
+${form.namaBib.value}
+
+━━━━━━━━━━━━━━━
+
+📌 STATUS
+SUDAH TERDAFTAR & LUNAS
+(Pembayaran oleh PIC Komunitas)
+
+━━━━━━━━━━━━━━━
+
+🔎 CEK STATUS PESERTA
+https://run4yourlife.github.io/cekstatus-peserta/
+
+━━━━━━━━━━━━━━━
+
+🔥 Sampai jumpa di garis start
+RUN FOR YOUR LIFE 2026
+
+Terimakasih.`
+
+);
+
+
+// ======================================
+// FORMAT NOMOR WA
+// ======================================
+
+const nomorPeserta =
+form.whatsapp.value
+.replace(/\D/g,"")
+.replace(/^0/,"62");
+
+
+// ======================================
+// LINK WA PESERTA
+// ======================================
+
+const pesertaWaLink =
+`https://wa.me/${nomorPeserta}?text=${pesertaMessage}`;
+
+
+//
+// TAMPILKAN SUCCESS
+//
+
 successText.innerHTML = `
 
 <div style="
@@ -793,21 +866,56 @@ border-radius:18px;
 line-height:1.9;
 ">
 
-🏃 HALLO, SELAMAT
-<b>${form.namaLengkap.value}</b>
-REGISTRASI ANDA BERHASIL<br><br>
+🏃 HALLO, SELAMAT<br>
+<b>${form.namaLengkap.value}</b><br>
+REGISTRASI ANDA BERHASIL ✅
+<br><br>
 
 👥 <b>Komunitas :</b><br>
-${komunitasData.namaKomunitas}<br><br>
+${komunitasData.namaKomunitas}
+<br><br>
 
 🎟 <b>Kategori :</b><br>
-${komunitasData.kategori}<br><br>
+${komunitasData.kategori}
+<br><br>
 
-🆔 <b>Nama BIB :</b><br>
-${form.namaBib.value}<br><br>
+🆔 <b>Register ID :</b><br>
+${res.registerId}
+<br><br>
+
+🏷 <b>No BIB :</b><br>
+${res.bib}
+<br><br>
+
+🎽 <b>Nama BIB :</b><br>
+${form.namaBib.value}
+<br><br>
 
 🔥 Sampai jumpa di
 <b>RUN FOR YOUR LIFE 2026</b>
+
+<br><br>
+
+<a
+href="${pesertaWaLink}"
+target="_blank"
+style="
+display:block;
+width:100%;
+text-align:center;
+padding:16px;
+border-radius:14px;
+background:linear-gradient(135deg,#00c853,#00e676);
+color:white;
+font-weight:800;
+text-decoration:none;
+font-size:14px;
+box-shadow:0 8px 20px rgba(0,200,83,.35);
+">
+
+📲 KIRIM DATA SAYA KE WHATSAPP
+
+</a>
 
 </div>
 

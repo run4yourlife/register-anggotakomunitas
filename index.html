@@ -305,9 +305,11 @@ required>
 <label>Nomor WhatsApp</label>
 
 <input
-type="text"
+type="tel"
 name="wa"
 placeholder="08xxxxxxxxxx"
+pattern="[0-9]{10,15}"
+maxlength="15"
 required>
 
 </div>
@@ -375,9 +377,11 @@ required>
 <label>Kontak Darurat</label>
 
 <input
-type="text"
+type="tel"
 name="kontakDarurat"
 placeholder="08xxxxxxxxxx"
+pattern="[0-9]{10,15}"
+maxlength="15"
 required>
 
 </div>
